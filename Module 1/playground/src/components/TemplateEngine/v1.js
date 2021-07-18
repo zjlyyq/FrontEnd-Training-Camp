@@ -9,7 +9,7 @@ export default class TemplateV1 {
   render(tmpl, data) {
     let dom = this.engine.render(tmpl, data);
     console.log("html>>>", dom);
-    this.root.appendChild(dom);
+    // this.root.appendChild(dom);
   }
 
   mounted(dom) {

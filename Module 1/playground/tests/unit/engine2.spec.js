@@ -7,9 +7,23 @@ describe("engine.js", () => {
         const htmlTmpl = NewsList.render();
         let nodes = engine.render(
             htmlTmpl,
-            { hello: "hello,world" }
+            { 
+                newsList: [
+                    {
+                        image: 'a',
+                        title: 't'
+                    },
+                    {
+                        image: 'b',
+                        title: 'tt'
+                    },
+                    {
+                        image: 'c',
+                        title: 'ttt'
+                    }
+                ] 
+            }
         );
-        console.log(nodes);
     });
 
     it("Engine2 parseAttribute", () => {

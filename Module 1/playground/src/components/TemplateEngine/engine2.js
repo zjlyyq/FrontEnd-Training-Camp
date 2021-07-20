@@ -16,6 +16,7 @@ export default class Engine2 {
                 this.nodes.set(node.uuid, node);
                 return `(${node.uuid})`;
             })
+            console.log(tmpl)
             //<img src="a"/>类型
             tmpl = tmpl.replace(re2, (s0, s1, s2) => {
                 let attr = this.parseAttribute(s2);
@@ -23,9 +24,11 @@ export default class Engine2 {
                 this.nodes.set(node.uuid, node);
                 return `(${node.uuid})`;
             });
+            console.log(tmpl)
         }
         // (kvp4hzv8.ldt)        
-        let nodes = this.parseToNode(tmpl);
+        let rootNode = this.parseToNode(tmpl);
+        let dom = this.parseNodeToDom(rootNode, data);
     }
 
     parseToNode(template) {
@@ -40,11 +43,11 @@ export default class Engine2 {
             [...nodestr.matchAll(re)].forEach(item => {
                 let vnode = this.nodes.get(item[1]);
                 let newnode = new VNode(
-                    n.tag, 
-                    n.attr, 
+                    vnode.tag, 
+                    vnode.attr, 
                     [], 
                     pnode, 
-                    n.childrenTemplate
+                    vnode.childrenTemplate
                 );
                 pnode.children.push(newnode);
                 stack.push(newnode);
@@ -54,10 +57,66 @@ export default class Engine2 {
         return parent.children[0];
     }
 
-    parseNodeToDom() {
+    parseNodeToDom(root, data) {
+        console.log(root, data);
+        let fragment = document.createDocumentFragment();
+        let stack = [[root, fragment, data]];
+        
+        //转成成node节点
+        while(stack.length > 0) {
+            let [pnode, pdom, scope] = stack.pop();
+            if (pnode.attr.get('for')) {
+                // item in newsList
+                let [key, prop] = pnode.attr.get("for").split("in");
+                key = key.trim();
+                prop = prop.trim();
+                for (let item of data[prop]) {
+                    let newnode = new VNode(
+                        pnode.tag,
+                        pnode.attr,
+                        pnode.children,
+                        pnode.parent,
+                        pnode.childrenTemplate
+                    )
+                    let newscope = {};
+                    newscope[key] = item;
+                    let html = this.scopehtmlParse(newnode, data, newscope);
+                }
+            } else {
+                let html = this.scopehtmlParse(pnode, data, scope);
+                console.log(html)        
+                let ele = this.createElement(pnode, html);
+            }
+        }
 
+        return fragment;
     }
 
+    scopehtmlParse(node, globalScope, currentScope) {
+        return node.childrenTemplate.replace(/\{\{(.*?)\}\}/g, (s0, s1) => {
+            let props = s1.split(".");
+            let val = curentScope[props[0]] || globalScope[props[0]];
+            props.slice(1).forEach((item) => {
+              val = val[item];
+            });
+            return val;
+        });
+    }
+
+    createElement(node, html) {
+        let ignoreAttr = ["for", "click"];
+        let dom = document.createElement(node.tag);
+        for (let [key, val] of node.attr) {
+        if (!ignoreAttr.includes(key)) {
+            dom.setAttribute(key, val);
+        }
+        }
+        if (node.children.length === 0) {
+        dom.innerHTML = html;
+        }
+        return dom;
+    }
+    
     parseAttribute(str) {
         str = str.trim();
         let attr = new Map();

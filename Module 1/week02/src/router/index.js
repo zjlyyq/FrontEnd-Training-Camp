@@ -18,6 +18,11 @@ const routes = [
         path: '/templateEngine2',
         name: 'templateEngine2',
         component: () => import(/* webpackChunkName: "templateEngine" */ '../views/TemplateEngine2.vue')
+    },
+    {
+        path: '/kthbiggest',
+        name: 'kthbiggest',
+        component: () => import(/* webpackChunkName: "templateEngine" */ '../views/KthBiggest/KthBiggest.vue')
     }
 ];
 

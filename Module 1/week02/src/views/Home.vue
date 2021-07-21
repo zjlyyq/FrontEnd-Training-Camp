@@ -1,10 +1,8 @@
 <template>
     <div>
-        <ul>
-            <li v-for="item in linkList" :key="item.path">
-                <router-link :to="item.path" class="link">{{item.name}}</router-link>
-            </li>
-        </ul>
+        <div  class="li" v-for="item in linkList" :key="item.path">
+            <router-link :to="item.path" class="link">{{item.name}}</router-link>
+        </div>
     </div>
 </template>
 
@@ -15,11 +13,15 @@ export default {
         return {
             linkList: [
                 {
-                    name: '模板引擎',
+                    name: '模板引擎-支持列表渲染',
                     path: '/templateEngine'
                 },
                 {
-                    name: '0717课后作业：实现下面代码中的 render 方法，并将模板字符串渲染成 DOM。',
+                    name: '0715作业：算法-数组中第 K 大的元素',
+                    path: '/kthbiggest'
+                },
+                {
+                    name: ' 0717作业：模板引擎-增加v-if条件渲染',
                     path: '/templateEngine2'
                 }
             ]
@@ -30,7 +32,7 @@ export default {
 
 
 <style scoped>
-    li {
+    .li {
         list-style: none;
         width: 300px;
         height: 200px;
@@ -38,6 +40,7 @@ export default {
         border-radius: 10px;
         margin: 10px;
         display: inline-block;
+        line-height: 200px;
         text-align: center;
         vertical-align: bottom;
     }

@@ -13,6 +13,11 @@ const routes = [
         path: '/templateEngine',
         name: 'templateEngine',
         component: () => import(/* webpackChunkName: "templateEngine" */ '../views/TemplateEngine.vue')
+    },
+    {
+        path: '/templateEngine2',
+        name: 'templateEngine2',
+        component: () => import(/* webpackChunkName: "templateEngine" */ '../views/TemplateEngine2.vue')
     }
 ];
 

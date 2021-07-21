@@ -9,7 +9,7 @@
          <String>模板引擎</String>
          <ConnectedNoteIDs>0, 2</ConnectedNoteIDs>
       </Note>
-      <Note Width="655.859" FontSize="12" ID="2" Position="423.8,198.0">
+      <Note Width="655.859" FontSize="12" ID="2" Position="504.3,158.2">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="0" Style="Rounded"/>
@@ -33,7 +33,7 @@
     }</String>
          <ConnectedNoteIDs>1, 3</ConnectedNoteIDs>
       </Note>
-      <Note Width="432.031" ID="3" Position="535.9,7.8">
+      <Note Width="432.031" ID="3" Position="580.5,1.6">
          <Appearance>
             <Alignment>Left</Alignment>
          </Appearance>

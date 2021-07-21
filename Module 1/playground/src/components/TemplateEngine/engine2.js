@@ -65,7 +65,13 @@ export default class Engine2 {
         
         //转成成node节点
         while(stack.length > 0) {
-            let [pnode, pdom, scope] = stack.pop();
+            let [pnode, pdom, scope] = stack.shift();
+            // v-if 处理逻辑
+            if (pnode.attr.get('v-if')) {
+                let [prop, key] = pnode.attr.get('v-if').split('.');
+                if (!scope[prop][key])
+                    continue;
+            }
             if (pnode.attr.get('for')) {
                 // item in newsList
                 let [key, prop] = pnode.attr.get("for").split("in");
@@ -147,7 +153,7 @@ export default class Engine2 {
     parseAttribute(str) {
         str = str.trim();
         let attr = new Map();
-        str.replace(/(\w+)\s*=['"](.*?)['"]/gm, (s0, s1, s2) => {
+        str.replace(/(\w+-?\w+)\s*=['"](.*?)['"]/gm, (s0, s1, s2) => {
             attr.set(s1, s2);
             return s0;
         });

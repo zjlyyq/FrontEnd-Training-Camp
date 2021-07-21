@@ -7,7 +7,7 @@ export default class Engine2 {
     render(tmpl, data) {
         const re1 = /<(\w+)\s*([^>]*)>([^<]*)<\/\1>/gm; //匹配<div class="a">XXX</div>
         const re2 = /<(\w+)\s*([^(/>)]*)\/>/gm; //匹配<img src="a"/>
-        tmpl = tmpl.replace(/\n/gm, "");
+        tmpl = tmpl.replace(/[\n]/gm, "");
         while(re1.test(tmpl) || re2.test(tmpl)) {
             tmpl = tmpl.replace(re1, ($0, $1, $2, $3) => {
                 let attr = this.parseAttribute($2);
@@ -29,6 +29,7 @@ export default class Engine2 {
         // (kvp4hzv8.ldt)        
         let rootNode = this.parseToNode(tmpl);
         let dom = this.parseNodeToDom(rootNode, data);
+        return dom;
     }
 
     parseToNode(template) {
@@ -81,18 +82,29 @@ export default class Engine2 {
                     let newscope = {};
                     newscope[key] = item;
                     let html = this.scopehtmlParse(newnode, data, newscope);
+                    let ele = this.createElement(newnode, html);
+                    this.scopeAtrrParse(ele, newnode, data, newscope);
+                    pdom.appendChild(ele);
+                    for(let child of newnode.children) {
+                        stack.push([child, ele, newscope])
+                    }
                 }
             } else {
                 let html = this.scopehtmlParse(pnode, data, scope);
                 console.log(html)        
                 let ele = this.createElement(pnode, html);
+                this.scopeAtrrParse(ele, pnode, data, scope);
+                pdom.appendChild(ele);
+                for(let child of pnode.children) {
+                    stack.push([child, ele, scope])
+                }
             }
         }
 
         return fragment;
     }
 
-    scopehtmlParse(node, globalScope, currentScope) {
+    scopehtmlParse(node, globalScope, curentScope) {
         return node.childrenTemplate.replace(/\{\{(.*?)\}\}/g, (s0, s1) => {
             let props = s1.split(".");
             let val = curentScope[props[0]] || globalScope[props[0]];
@@ -103,16 +115,31 @@ export default class Engine2 {
         });
     }
 
+    scopeAtrrParse(ele, node, globalScope, curentScope) {
+        console.log(node.attr);
+        for (let [key, value] of node.attr) {
+          let result = /\{\{(.*?)\}\}/.exec(value);
+          if (result && result.length > 0) {
+            let props = result[1].split(".");
+            let val = curentScope[props[0]] || globalScope[props[0]];
+            props.slice(1).forEach((item) => {
+              val = val[item];
+            });
+            ele.setAttribute(key, val);
+          }
+        }
+    }
+
     createElement(node, html) {
         let ignoreAttr = ["for", "click"];
         let dom = document.createElement(node.tag);
         for (let [key, val] of node.attr) {
-        if (!ignoreAttr.includes(key)) {
-            dom.setAttribute(key, val);
-        }
+            if (!ignoreAttr.includes(key)) {
+                dom.setAttribute(key, val);
+            }
         }
         if (node.children.length === 0) {
-        dom.innerHTML = html;
+            dom.innerHTML = html;
         }
         return dom;
     }

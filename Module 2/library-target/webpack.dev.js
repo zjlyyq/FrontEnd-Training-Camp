@@ -13,7 +13,8 @@ module.exports = {
         clean: true,
         library: {
             name: 'timeUtil',
-            type: 'amd',
+            type: 'jsonp',
+            // umdNamedDefine: false
             // type: 'commonjs2',
             // type: 'module'
         }

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "lerna": "^4.0.0",
     "webpack": "^5.47.1",
     "webpack-cli": "^4.7.2"
   }

@@ -1,4 +1,3 @@
-const { type } = require('os');
 const path = require('path');
 
 
@@ -9,11 +8,13 @@ module.exports = {
     // experiments: {
     //     outputModule: true
     // },
+    devtool: false,
     output: {
         clean: true,
         library: {
             name: 'timeUtil',
-            type: 'amd',
+            type: 'commonjs',
+            // umdNamedDefine: false
             // type: 'commonjs2',
             // type: 'module'
         }

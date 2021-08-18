@@ -7,13 +7,13 @@ const workers = {};
 
 function createWorker() {
     let worker = child_process.fork('./child.js');
-    workers[worker.pid] = worker;
     worker.on('exit', function() {
         console.log('exit:', arguments);
         delete workers[worker.pid];
         createWorker();
     })
     worker.send('server',  server);
+    workers[worker.pid] = worker;
 }
 server.listen(8888, () => {
     console.log('listening port 8888!');
@@ -21,5 +21,11 @@ server.listen(8888, () => {
        createWorker();
     }
     server.close();
+})
+
+process.on('exit', () => {
+    for(let pid in workers) {
+        workers[pid].kill();
+    }
 })
 

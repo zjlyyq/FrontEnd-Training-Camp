@@ -1,3 +1,5 @@
+
+```plain text
 作业：Master/Worker 主从网络处理架构实现
 概述：创建一个主从网络架构，Master 接受 Socket 连接，根据负载均衡，分发给 Worker，Worker 处理具体业务。
 
@@ -5,3 +7,14 @@
 
 提交链接： https://jinshuju.net/f/p2oCxP
 截止时间：8 月 18 日 23:59
+```
+
+### 运行
+```sh
+$ node master.js
+```
+
+### 验证
+```sh
+$ ps -ef | grep child.js
+```

@@ -3,13 +3,22 @@ const numCPUs = require("os").cpus().length;
 const net = require('net');
 
 const server = net.createServer();
+const workers = {};
 
+function createWorker() {
+    let worker = child_process.fork('./child.js');
+    workers[worker.pid] = worker;
+    worker.on('exit', function() {
+        console.log('exit:', arguments);
+        delete workers[worker.pid];
+        createWorker();
+    })
+    worker.send('server',  server);
+}
 server.listen(8888, () => {
     console.log('listening port 8888!');
     for(let i = 0;i < numCPUs;i ++) {
-        let child = child_process.fork('./child.js');
-        console.log(typeof(child));
-        child.send('server',  server);
+       createWorker();
     }
     server.close();
 })

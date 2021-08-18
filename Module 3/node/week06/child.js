@@ -6,7 +6,7 @@ const server = http.createServer((req, res) => {
 
 process.on('message', (msg, tcp) => {
     if (msg === 'server') {
-        console.log(process.pid);
+        console.log('worker pid:', process.pid);
         tcp.on('connection',  socket => {
             server.emit('connection', socket);
         })

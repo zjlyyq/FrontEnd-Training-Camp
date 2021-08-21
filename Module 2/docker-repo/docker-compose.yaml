@@ -14,17 +14,17 @@ services:
     ports: 
       - 27017:27017
 
-  # mongo-express:
-  #   image: "mongo-express:0.49"
-  #   container_name: "mongo-express"
-  #   restart: "always"
-  #   environment:
-  #     - "ME_CONFIG_MONGODB_ADMINUSERNAME=root"
-  #     - "ME_CONFIG_MONGODB_ADMINPASSWORD=mongodb"
-  #   ports:
-  #     - "8081:8081"
-  #   depends_on:
-  #     - mongodb
+  mongo-express:
+    image: "mongo-express:0.49"
+    container_name: "mongo-express"
+    restart: "always"
+    environment:
+      - "ME_CONFIG_MONGODB_ADMINUSERNAME=root"
+      - "ME_CONFIG_MONGODB_ADMINPASSWORD=mongodb"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
 
 volumes: 
   mongodb_data:

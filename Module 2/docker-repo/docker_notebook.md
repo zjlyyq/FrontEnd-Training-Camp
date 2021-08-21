@@ -93,51 +93,9 @@ $ sudo yum install docker-ce docker-ce-cli containerd.io
    docker-ce.x86_64            3:20.10.8-3.el7                    @docker-ce-stable
    docker-ce.x86_64            3:20.10.7-3.el7                    docker-ce-stable
    docker-ce.x86_64            3:20.10.6-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:20.10.5-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:20.10.4-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:20.10.3-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:20.10.2-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:20.10.1-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:20.10.0-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.9-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.8-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.7-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.6-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.5-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.4-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.3-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.2-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.15-3.el7                   docker-ce-stable
-   docker-ce.x86_64            3:19.03.14-3.el7                   docker-ce-stable
-   docker-ce.x86_64            3:19.03.1-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:19.03.13-3.el7                   docker-ce-stable
-   docker-ce.x86_64            3:19.03.12-3.el7                   docker-ce-stable
-   docker-ce.x86_64            3:19.03.11-3.el7                   docker-ce-stable
-   docker-ce.x86_64            3:19.03.10-3.el7                   docker-ce-stable
-   docker-ce.x86_64            3:19.03.0-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.9-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.8-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.7-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.6-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.5-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.4-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.3-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.2-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.1-3.el7                    docker-ce-stable
-   docker-ce.x86_64            3:18.09.0-3.el7                    docker-ce-stable
-   docker-ce.x86_64            18.06.3.ce-3.el7                   docker-ce-stable
-   docker-ce.x86_64            18.06.2.ce-3.el7                   docker-ce-stable
-   docker-ce.x86_64            18.06.1.ce-3.el7                   docker-ce-stable
-   docker-ce.x86_64            18.06.0.ce-3.el7                   docker-ce-stable
-   docker-ce.x86_64            18.03.1.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            18.03.0.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.12.1.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.12.0.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.09.1.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.09.0.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.06.2.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.06.1.ce-1.el7.centos            docker-ce-stable
-   docker-ce.x86_64            17.06.0.ce-1.el7.centos            docker-ce-stable
+   .                            .                                  .
+   .                            .                                  .
+   .                            .                                  .
    docker-ce.x86_64            17.03.3.ce-1.el7                   docker-ce-stable
    docker-ce.x86_64            17.03.2.ce-1.el7.centos            docker-ce-stable
    docker-ce.x86_64            17.03.1.ce-1.el7.centos            docker-ce-stable
@@ -209,3 +167,61 @@ Options:
 有的时候需要使用镜像代理服务来加速Docker镜像的获取过程，可以在Docker的启动配置中增加 `--registry-mirror=proxy_URL` 来指定镜像代理服务器地址（如：https://registry.docker-cn.com）。
 
 ### 查看镜像信息
+
+`docker inspect ...`
+
+## 创建镜像
+创建镜像有三种方式：基于已有镜像的容器创建、基于本地模板到导入，基于Dockerfile创建。
+### 基于已有的容器创建
+`docker [container] commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]`
+
+OPTIONS:
+   + -a, --author="": 作者信息
+   + -c, --change=[]: 提交的时候执行的Dockerfile指令
+   + -m, --message="": 提交信息
+   + -p, --pause=true: 提交时暂停容器执行
+
+```sh
+zjl@zjl:~$ sudo docker commit -m "test port mapping and add some static files" -a "zjl" 4d22dbb1f90 nginx:0.0.1
+sha256:570f2403b4c4c749df0d86cb41e88f5daaacd1ac1e4bbe9804b26cd63e9aa2b4
+zjl@zjl:~$ sudo docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+nginx        0.0.1     570f2403b4c4   19 seconds ago   139MB
+nginx        latest    dd34e67e3371   2 days ago       133MB
+zjl@zjl:~$ 
+```
+
+### 基于本地模板导入
+`docker [image] import [OPTIONS] file|URL|-[REPOSITORY[:TAG]]`
+
+###  基于Dockerfile 创建
+Docker 是一个文本文件，，描述了利用给定的指令基于一个父镜像创建新镜像的过程。
+
+## 镜像的存出和载入
+`docker [image] save` 和 `docker [image] load`
+
+e.g.
+
+存出
+![](/images/Snipaste_2021-08-20_11-32-27.png)
+
+载入
+
+`docker load < nginx_0.0.1.tar`
+
+## 上传镜像
+
+1. 给要上传的镜像打上TAG
+   e.g.
+   ```sh
+   sudo docker tag nginx:0.0.1 ${YOUR DOCKER USERNAME}/nginx:0.0.1
+   ```
+2. push
+   ```sh
+   sudo docker push ${YOUR DOCKER USERNAME}/nginx:0.0.1
+   ```
+# 参考资料
+## 网络代理问题：
++ [https://docs.docker.com/config/daemon/systemd/#httphttps-proxy](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
++ [https://stackoverflow.com/questions/50392780/error-response-from-daemon-get-http-s-registry-1-docker-io-v2-proxyconnect](https://stackoverflow.com/questions/50392780/error-response-from-daemon-get-http-s-registry-1-docker-io-v2-proxyconnect)
+

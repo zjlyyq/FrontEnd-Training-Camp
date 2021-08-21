@@ -22,7 +22,7 @@ server.listen(8888, () => {
     }
     server.close();
 })
-
+// 主进程结束时，结束所有子进程
 process.on('exit', () => {
     for(let pid in workers) {
         workers[pid].kill();

@@ -220,6 +220,26 @@ e.g.
    ```sh
    sudo docker push ${YOUR DOCKER USERNAME}/nginx:0.0.1
    ```
+
+
+
+# docker-compose 使用
+## 安装
+### ubuntu
+1. 安装 pip3
+   ```sh
+   $ sudo apt install python3-pip
+   ```
+2. 升级pip3
+   安装好pip3后可能版本很低，需要升级一下，否则安装docker-compose可能会报错。
+   ```sh
+   sudo pip3 install --upgrade pip
+   ```
+3. 安装 docker-compose
+   ```sh
+   sudo pip3 install docker-compose
+   ```
+
 # 参考资料
 ## 网络代理问题：
 + [https://docs.docker.com/config/daemon/systemd/#httphttps-proxy](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)

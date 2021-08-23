@@ -16,7 +16,7 @@ const fastify = require('fastify')({
 fastify.register(require('./routers/index'));
 
 //setup mongodb
-fastify.register(require("./plugin/mongo"));
+fastify.register(require("./plugins/mongo"));
 
 
 // 静态服务，类似于express.static

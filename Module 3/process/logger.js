@@ -11,6 +11,9 @@ function createWriteStream(fileName) {
 }
 
 const writeStream = createWriteStream("debug.log");
+writeStream.on('close', () => {
+    console.log('流关闭')
+})
 // 日期时间格式化
 const formater = new Intl.DateTimeFormat("zh-cn", {
     year: "numeric",
@@ -23,11 +26,15 @@ const formater = new Intl.DateTimeFormat("zh-cn", {
 });
 
 function log() {
-    console.log('arguments', ...arguments);
+    // console.log('arguments', ...arguments);
     let logs = [...arguments].join(",");
     let fullLog = `${formater.format(new Date())} [${process.pid}]: ${logs}\n`;
+    try {
+        writeStream.write(fullLog);
+    } catch (error) {
+        console.log(error)
+    }
     console.log(fullLog);
-    writeStream.write(fullLog);
 }
 
 module.exports = {

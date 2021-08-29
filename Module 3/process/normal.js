@@ -15,10 +15,11 @@ if (process.send) {
     ++ a;
     // 主进程
     logger.log('主进程启动', process.pid);
+    setTimeout(() => {
+        let child = child_process.fork(__filename);
+    }, 3000)
 
-    let child = child_process.fork(__filename);
-
-    process.on('exit', () => {
+    process.on('exit', (code) => {
         logger.log('主进程退出', process.pid);
     })
     // process.exit(); 

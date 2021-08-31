@@ -24,8 +24,10 @@ cp.exec('docker ps -a', (error, stdout, stderr) => {
             const containId = line.split(/\s+/)[0];
             if (containId) {
                 // 运行 docker rm containerId 删除
-                cp.exec('docker rm -f' + containId, (error, stdout) => {
-                    console.log('成功删除id为' + containId + '的容器');
+                cp.exec('docker rm ' + containId, (error, stdout) => {
+                    if (error) console.log(error);
+                    else
+                        console.log('成功删除id为' + containId + '的容器');
                 });
             }
         })

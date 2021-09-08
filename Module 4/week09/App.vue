@@ -1,26 +1,20 @@
 <template>
-    <div>   
-        <!-- <input-awesome :config="config" @change="inputChanged">
-            <button>submit</button>
-        </input-awesome>
-        <br>
-        <custom-input :config="config2">
-            <button>submit</button>
-        </custom-input>
-        <br>
-        <functional-input :config="config3" data-name="functional-component" data-class="functional" a="a">
-        
-        </functional-input>
-        <functional-input :config="config3" data-name="functional-component" data-class="functional" a="a">
-            <button>submit</button>
-        </functional-input> -->
-        <custom-form :json="json"></custom-form>
+    <div class="container" style="display: flex; height: 100%;">
+        <div class="pans" style="width: 30%; border: 1px solid #ccc;">
+            <button data-name="input" draggable="true">input</button>
+            <button data-name="checkbox" draggable="true">checkbox</button>
+            <button data-name="button" draggable="true">button</button>
+            <button data-name="image" draggable="true">image</button>
+            <button data-name="radio" draggable="true">input</button>
+        </div>
+        <div class="preview" style="width: 40%;border: 1px solid #ccc;margin: 0 10px;"></div>
+        <div style="flex: 1;border: 1px solid #ccc;padding: 0 5px;">
+            <custom-form :json="json"></custom-form>
+        </div>
     </div>
 </template>
 
-
 <script>
-
 export default {
     name: "App",
     data() {
@@ -69,3 +63,5 @@ export default {
     }
 }
 </script>
+
+

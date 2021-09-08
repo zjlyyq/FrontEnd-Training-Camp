@@ -9,14 +9,17 @@ Vue.component('custom-input', {
   },
   render: function (h) {
     console.log('非函数式组件(JSX)实例：', this);
+    const labelDisplay = this.config.label===undefined?'none':'inline';
+    console.log('labelDisplay', labelDisplay)
     return (
       <div draggable="true" style="padding: 10px 0px;cursor: move;">
         <div>
+          <label style={{display: labelDisplay}}>{this.config.label}</label>
           <input
             value={this.config.value}
             type={this.config.type} 
             placeholder={this.config.placeholder} 
-            style={'border: 1px solid #ccc;;line-height: 32px;padding: 0px 12px; width: 100%;box-sizing: border-box'}
+            style={'border: 1px solid #ccc;;line-height: 32px;padding: 0px 12px;'}
           />
         </div>
         { this.$slots.default }

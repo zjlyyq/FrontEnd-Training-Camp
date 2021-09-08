@@ -3,10 +3,20 @@ import Vue from 'vue';
 function childrenGenerator(h, json) {
   let children = [];
   for(let config of json) {
-    console.log(config);
+    console.log('config', config);
     if (config.name === 'input') {
       children.push(
         <custom-input config={config}></custom-input>
+      )
+    } 
+    else if(config.name === 'image') {
+      children.push(
+        <custom-image config={config}></custom-image>
+      )
+    }
+    else if(config.name === 'checkbox') {
+      children.push(
+        <custom-checkbox config={config}></custom-checkbox>
       )
     }
   }

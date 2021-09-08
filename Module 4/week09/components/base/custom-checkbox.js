@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-Vue.component('custom-input', {
+Vue.component('custom-checkbox', {
   props: {
     config: {
       type: Object,
@@ -12,10 +12,11 @@ Vue.component('custom-input', {
     return (
       <div>
         <div>
+          <label>{this.config.label}</label>
           <input
-            type={this.config.type} 
-            placeholder={this.config.placeholder} 
-            style={'border: 1px solid #ccc;;line-height: 32px;padding: 0px 12px; width: 100%;box-sizing: border-box'}
+            value={this.config.value}
+            type={'checkbox'}
+            style={'border: 1px solid #ccc;;line-height: 32px;padding: 0px 12px;'}
           />
         </div>
         { this.$slots.default }

@@ -1,0 +1,14 @@
+[
+    {
+        "name": "name",
+        "type": "text",
+        "placeholder": "Please inout your name...",
+        "max-length": "20"
+    },
+    {
+        "name": "name",
+        "type": "checkout",
+        "placeholder": "Please inout your name...",
+        "max-length": "20"
+    }
+]

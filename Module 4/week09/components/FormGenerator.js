@@ -16,8 +16,24 @@ function childrenGenerator(h, json) {
     }
     else if(config.name === 'checkbox') {
       children.push(
-        <custom-checkbox config={config}></custom-checkbox>
+        <custom-checkbox config={config}>
+        </custom-checkbox>
       )
+    } else {
+      if (config.children && config.children.length > 0) {
+        children.push(
+          <div style={config.style}>
+            {
+              childrenGenerator(h, config.children)
+            }
+          </div>
+        )
+      } else {
+        children.push(
+          <div style={config.style}>
+          </div>
+        )
+      }
     }
   }
   return children;

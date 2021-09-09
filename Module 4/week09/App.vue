@@ -19,11 +19,13 @@
     </div>
     <div
       class="preview"
-      style="width: 40%; border: 1px solid #ccc; margin: 0 10px;"
+      style="width: 40%; border: 1px solid #ccc; margin: 0 10px"
     >
-      <p>编辑区还没想好怎么展示</p>
+      <editing-form :json="json"></editing-form>
     </div>
-    <div style="flex: 1; border: 1px solid #ccc; padding: 0 5px;overflow: scroll;">
+    <div
+      style="flex: 1; border: 1px solid #ccc; padding: 0 5px; overflow: scroll"
+    >
       <custom-form :json="json"></custom-form>
     </div>
   </div>
@@ -84,14 +86,14 @@ export default {
                 label: "label: ",
                 name: "input",
                 type: "text",
-                placeholder: "Enter Your Name...",
+                placeholder: "place input...",
                 value: "",
               },
               {
                 name: "image",
                 imgUrl:
                   "https://static001.geekbang.org/account/avatar/00/14/84/9e/05ed50dd.jpg",
-              }
+              },
             ],
           });
           break;
@@ -103,19 +105,25 @@ export default {
                 label: "label: ",
                 name: "input",
                 type: "text",
-                placeholder: "Enter Your Name...",
+                placeholder: "place input...",
                 value: "",
               },
               {
                 name: "image",
                 imgUrl:
                   "https://static001.geekbang.org/account/avatar/00/14/84/9e/05ed50dd.jpg",
-              }
+              },
             ],
           });
           break;
         default:
-          break;
+          this.json.push({
+            label: "label: ",
+            name: "input",
+            type: "text",
+            placeholder: "place input...",
+            value: "",
+          });
       }
     });
   },

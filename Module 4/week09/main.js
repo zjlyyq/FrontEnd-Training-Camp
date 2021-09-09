@@ -1,8 +1,11 @@
 import Vue from 'vue';
 
 import App from './App.vue'
-import './components/BaseComponentInit'
+import './components/base'
+import './components/editor'
 import './components/FormGenerator'
+import './components/FormEditing'
+
 new Vue({
     el: "#app",
     data: {

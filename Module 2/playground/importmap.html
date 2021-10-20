@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>importmap: 模块名映射</title>
+</head>
+<body>
+  <script type="importmap">
+    {
+      "imports": {
+        "loadsh": "https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import 'loadsh';
+    console.log(`type="module" script: this = ${this}`);
+    console.log(window._);
+  </script>
+
+  <script>
+    console.log(`type="javascript" script: this = ${this}`);
+  </script>
+</body>
+</html>

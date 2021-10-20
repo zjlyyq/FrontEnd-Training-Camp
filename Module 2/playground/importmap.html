@@ -10,15 +10,22 @@
   <script type="importmap">
     {
       "imports": {
-        "loadsh": "https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js"
+        "loadsh": "/node_modules/lodash-es/lodash.js"  
       }
     }
   </script>
 
   <script type="module">
-    import 'loadsh';
+    // 导入库里化函数
+    import { curry }  from 'loadsh';
     console.log(`type="module" script: this = ${this}`);
-    console.log(window._);
+    console.log(curry);
+    function add(a, b, c) {
+      return a + b+ c;
+    }
+    const curriedAdd = curry(add);
+    console.log(curriedAdd);
+    console.log(curriedAdd(1)(2)(3));
   </script>
 
   <script>

@@ -81,7 +81,7 @@ export default {
             name: "input",
             type: "text",
             placeholder: "Enter Your Name...",
-            value: "",
+            value: "default",
           });
       }
     });

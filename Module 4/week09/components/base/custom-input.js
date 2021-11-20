@@ -15,12 +15,13 @@ Vue.component('custom-input', {
       <div draggable="true" style="padding: 10px 0px;cursor: move;">
         <div>
           <label style={{display: labelDisplay}}>{this.config.label}</label>
-          <input
+          {/* <input
             value={this.config.value}
             type={this.config.type} 
             placeholder={this.config.placeholder} 
             style={'border: 1px solid #ccc;;line-height: 32px;padding: 0px 12px;'}
-          />
+          /> */}
+          <el-input value={this.config.value} placeholder="请输入内容"></el-input>
         </div>
         { this.$slots.default }
       </div>

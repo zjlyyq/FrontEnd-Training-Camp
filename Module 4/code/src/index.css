@@ -1,0 +1,37 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+button {
+  line-height: 43px;
+  padding: 0 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 43px;
+  color: #ffffff;
+  background-color: #ededed;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: Arial;
+  background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+  border: 1px solid #337bc4;
+  border-radius: 5px;
+  box-shadow: 3px 4px 0px 0px #1564ad;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #f5f5f5;
+  background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+}

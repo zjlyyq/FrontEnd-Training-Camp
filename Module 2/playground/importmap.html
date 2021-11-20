@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>importmap: 模块名映射</title>
+</head>
+<body>
+  <script type="importmap">
+    {
+      "imports": {
+        "loadsh": "/node_modules/lodash-es/lodash.js"  
+      }
+    }
+  </script>
+
+  <script type="module">
+    // 导入库里化函数
+    import { curry }  from 'loadsh';
+    console.log(`type="module" script: this = ${this}`);
+    console.log(curry);
+    function add(a, b, c) {
+      return a + b+ c;
+    }
+    const curriedAdd = curry(add);
+    console.log(curriedAdd);
+    console.log(curriedAdd(1)(2)(3));
+  </script>
+
+  <script>
+    console.log(`type="javascript" script: this = ${this}`);
+  </script>
+</body>
+</html>
